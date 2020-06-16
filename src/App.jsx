@@ -91,7 +91,7 @@ class App extends Component {
           <button onClick={this.handleNewPerson}>add</button>
         </div>
         {person}
-        <button onClick={this.handleShowPerson} style={bottonStyle}>Show persons</button>
+        <button onClick={this.handleShowPerson} className="btn btn-sm btn-success fa fa-plus-square"  > </button>
         {/* <Person firstName /> */}
       </div>
     );
