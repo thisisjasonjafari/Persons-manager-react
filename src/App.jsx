@@ -9,6 +9,7 @@ class App extends Component {
       { id: 2, fullname: 'Sara RekabTalaei' },
       { id: 3, fullname: 'Majid Bayati' },
     ],
+    person: '',
     showPersons: false
   }
   handleShowPerson = () => {
@@ -28,7 +29,7 @@ class App extends Component {
     const persinIndex = allPersons.findIndex(p => p.id === id)
     const person = allPersons[persinIndex]
     person.fullname = event.target.value;
-    console.log(event);
+    // console.log(event);
 
     const persons = [...allPersons]
 
@@ -38,6 +39,19 @@ class App extends Component {
 
   }
 
+  handleNewPerson = () => {
+    const persons = [...this.state.persons];
+    const person = {
+      id: Math.floor(Math.random() * 10000),
+      fullname: this.state.person
+    }
+    persons.push(person);
+    this.setState({ persons, person: '' })
+  }
+
+  setPerson = event => {
+    this.setState({ person: event.target.value })
+  }
 
 
   render() {
@@ -67,6 +81,15 @@ class App extends Component {
       <div>
         <h2>Persons Manager</h2>
         <h4>There are {persons.length} are here.</h4>
+        <div>
+          <input
+            type="text"
+            placeholder="new person"
+            onChange={this.setPerson}
+            value={this.state.person}
+          />
+          <button onClick={this.handleNewPerson}>add</button>
+        </div>
         {person}
         <button onClick={this.handleShowPerson} style={bottonStyle}>Show persons</button>
         {/* <Person firstName /> */}
