@@ -6,11 +6,9 @@ class App extends Component {
   state = {
     persons: [
       { id: 1, fullname: 'Jason Jafari' },
-      { id: 2, fullname: 'Sara RekabTalaei' },
-      { id: 3, fullname: 'Majid Bayati' },
     ],
     person: '',
-    showPersons: false
+    showPersons: true
   }
   handleShowPerson = () => {
     this.setState({ showPersons: !this.state.showPersons });
@@ -45,8 +43,11 @@ class App extends Component {
       id: Math.floor(Math.random() * 10000),
       fullname: this.state.person
     }
-    persons.push(person);
-    this.setState({ persons, person: '' })
+
+    if (person.fullname !== "" && person.fullname !== " ") {
+      persons.push(person);
+      this.setState({ persons, person: '' })
+    }
   }
 
   setPerson = event => {
@@ -57,11 +58,7 @@ class App extends Component {
   render() {
     const { persons, showPersons } = this.state;
 
-    const bottonStyle = {
-      padding: "1em",
-      fontFamily: "BYekan",
-      backgroundColor: "pink"
-    };
+
 
     let person = null;
 
@@ -78,20 +75,36 @@ class App extends Component {
 
 
     return (
-      <div>
-        <h2>Persons Manager</h2>
-        <h4>There are {persons.length} are here.</h4>
-        <div>
-          <input
-            type="text"
-            placeholder="new person"
-            onChange={this.setPerson}
-            value={this.state.person}
-          />
-          <button onClick={this.handleNewPerson}>add</button>
+      <div className="text-center">
+        <div className="alert alert-info">
+          <h2>Persons Manager</h2>
+        </div>
+        <h5 className="aler alert-light">
+          There are
+          <span className="badge badge-pill badge-success">{persons.length}</span>
+           Persons here.
+          </h5>
+        <div className="m-2 p-2">
+          <form className="form-inline justify-content-center" onSubmit={event => event.preventDefault()}>
+            <div className="input-group w-25">
+              <input
+                type="text"
+                placeholder="type new name"
+                onChange={this.setPerson}
+                value={this.state.person}
+
+                className="form-control"
+              />
+              <div className="input-group-prepend">
+                <button onClick={this.handleNewPerson} className="btn btn-sm btn-success fa fa-plus-square" />
+              </div>
+
+            </div>
+          </form>
+
         </div>
         {person}
-        <button onClick={this.handleShowPerson} className="btn btn-sm btn-success fa fa-plus-square"  > </button>
+        <button onClick={this.handleShowPerson} className="btn btn-info  "  > Show Persons </button>
         {/* <Person firstName /> */}
       </div>
     );

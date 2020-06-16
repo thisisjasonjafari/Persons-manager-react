@@ -1,12 +1,22 @@
 import React from 'react'
 
-import './Person.css'
 const Person = ({ fullname, personDelete, changed }) => {
   return (
-    <div className="person" >
-      <h4>{`${fullname}`}</h4>
-      <input type="text" placeholder={fullname} onChange={changed} />
-      <button onClick={personDelete} >delete</button>
+    <div className="card text-white bg-info mb-3 w-25 mx-auto" >
+      <div className="card-body text-center">
+        <p className="d-block">
+          {`${fullname}`}
+        </p>
+        <div className="input-group justify-content-center">
+          <input type="text" className="form-control w-50" placeholder={fullname} onChange={changed} />
+          <div className="input-group-prepend">
+            <button  className="btn btn-sm btn-danger fa fa-trash" onClick={personDelete} ></button>
+
+          </div>
+        </div>
+      </div>
+
+
     </div>
   );
 }
