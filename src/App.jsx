@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { Alert, Button, Badge } from 'react-bootstrap';
+
+
+
 import Persons from './components/Person/Persons';
 
 
@@ -62,6 +66,11 @@ class App extends Component {
 
     let person = null;
 
+    let badngeStyle = '';
+    if (persons.length >= 3) badngeStyle = 'success';
+    if (persons.length <= 2) badngeStyle = 'warning';
+    if (persons.length <= 1) badngeStyle = 'danger';
+
     if (showPersons) {
       person = (
         <Persons
@@ -76,14 +85,23 @@ class App extends Component {
 
     return (
       <div className="text-center">
-        <div className="alert alert-info">
+        <Alert variant="info" >
           <h2>Persons Manager</h2>
-        </div>
-        <h5 className="aler alert-light">
-          There are
-          <span className="badge badge-pill badge-success">{persons.length}</span>
+        </Alert>
+        <Alert variant="light">
+
+          <h5>
+            There are
+          <Badge pill
+              variant={badngeStyle}
+            >
+              {persons.length}
+            </Badge>
            Persons here.
           </h5>
+        </Alert>
+
+
         <div className="m-2 p-2">
           <form className="form-inline justify-content-center" onSubmit={event => event.preventDefault()}>
             <div className="input-group w-25">
@@ -96,16 +114,26 @@ class App extends Component {
                 className="form-control"
               />
               <div className="input-group-prepend">
-                <button onClick={this.handleNewPerson} className="btn btn-sm btn-success fa fa-plus-square" />
+                <Button
+                  onClick={this.handleNewPerson}
+                  variant="success"
+                  size="sm"
+                  className="fa fa-plus-square"
+                />
               </div>
 
             </div>
           </form>
 
         </div>
+
+        <button
+          onClick={this.handleShowPerson}
+          className={showPersons ? "m-2 btn btn-info " : "m-2 btn btn-danger"}
+        >
+          {showPersons ? `Hide Persons` : `Show Persons`}
+        </button>
         {person}
-        <button onClick={this.handleShowPerson} className="btn btn-info  "  > Show Persons </button>
-        {/* <Person firstName /> */}
       </div>
     );
   }
