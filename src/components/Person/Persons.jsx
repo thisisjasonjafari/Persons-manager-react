@@ -4,7 +4,7 @@ import Person from './person';
 const Persons = ({ persons, personDelete, personChange }) => {
   return (
     <div>
-      {
+      { 
         persons.map(person => (
           <Person
             key={person.id}
