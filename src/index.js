@@ -3,12 +3,6 @@ import { render } from 'react-dom';
 import App from './App';
 
 import './index.css'
+import 'react-toastify/dist/ReactToastify.css'
 
-
-render(( <
-    div className = "App" >
-    <
-    App / >
-    <
-    /div>
-), document.getElementById('root'));
+render( <App appTitle="Persons Manager" / >  , document.getElementById('root'));

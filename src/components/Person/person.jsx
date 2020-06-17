@@ -1,5 +1,4 @@
 import React from 'react'
-
 const Person = ({ fullname, personDelete, changed }) => {
   return (
     <div className="card text-white bg-info mb-3 w-25 mx-auto" >
@@ -10,7 +9,12 @@ const Person = ({ fullname, personDelete, changed }) => {
         <div className="input-group justify-content-center">
           <input type="text" className="form-control w-50" placeholder={fullname} onChange={changed} />
           <div className="input-group-prepend">
-            <button  className="btn btn-sm btn-danger fa fa-trash" onClick={personDelete} ></button>
+            <button
+              className="btn btn-sm btn-danger fa fa-trash"
+              onClick={personDelete}
+            />
+
+
 
           </div>
         </div>

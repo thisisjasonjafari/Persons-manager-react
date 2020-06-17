@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { Alert, Button, Badge } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify'
 
 
 
 import Persons from './components/Person/Persons';
+import Header from './components/common/Header';
 
 
 class App extends Component {
@@ -23,6 +25,14 @@ class App extends Component {
     const persons = [...this.state.persons]
     const filterPerson = persons.filter(p => p.id !== id)
     this.setState({ persons: filterPerson })
+
+
+    const persinIndex = persons.findIndex(p => p.id === id)
+    const person = persons[persinIndex]
+    toast.error(`${person.fullname} was deleted succsessfully`, {
+      position: "top-left",
+      closeOnClick: true
+    })
   }
 
   handleNameChange = (event, id) => {
@@ -51,6 +61,12 @@ class App extends Component {
     if (person.fullname !== "" && person.fullname !== " ") {
       persons.push(person);
       this.setState({ persons, person: '' })
+      // Make Toast
+      toast.success('Person add succsessfully.', {
+        position: 'bottom-left',
+        closeButton: true,
+        closeOnClick: true
+      });
     }
   }
 
@@ -66,10 +82,7 @@ class App extends Component {
 
     let person = null;
 
-    let badngeStyle = '';
-    if (persons.length >= 3) badngeStyle = 'success';
-    if (persons.length <= 2) badngeStyle = 'warning';
-    if (persons.length <= 1) badngeStyle = 'danger';
+
 
     if (showPersons) {
       person = (
@@ -85,22 +98,8 @@ class App extends Component {
 
     return (
       <div className="text-center">
-        <Alert variant="info" >
-          <h2>Persons Manager</h2>
-        </Alert>
-        <Alert variant="light">
-
-          <h5>
-            There are
-          <Badge pill
-              variant={badngeStyle}
-            >
-              {persons.length}
-            </Badge>
-           Persons here.
-          </h5>
-        </Alert>
-
+        {/* Alert */}
+        <Header personsLength={persons.length} appTitle={this.props.appTitle} />
 
         <div className="m-2 p-2">
           <form className="form-inline justify-content-center" onSubmit={event => event.preventDefault()}>
@@ -134,6 +133,7 @@ class App extends Component {
           {showPersons ? `Hide Persons` : `Show Persons`}
         </button>
         {person}
+        <ToastContainer />
       </div>
     );
   }
