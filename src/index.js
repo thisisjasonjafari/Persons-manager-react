@@ -5,4 +5,4 @@ import App from './App';
 import './index.css'
 import 'react-toastify/dist/ReactToastify.css'
 
-render( <App appTitle="Persons Manager" / >  , document.getElementById('root'));
+render( <App   / >  , document.getElementById('root'));

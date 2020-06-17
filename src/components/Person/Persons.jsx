@@ -1,17 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Person from './person';
+import SimpleContext from '../../context/SimpleContext';
 
-const Persons = ({ persons, personDelete, personChange }) => {
+const Persons = () => {
+  const context = useContext(SimpleContext)
+  // console.log(context);
   return (
     <div>
-      { 
-        persons.map(person => (
+      {
+        context.persons.map(person => (
           <Person
             key={person.id}
             fullname={person.fullname}
             age={person.age}
-            personDelete={() => personDelete(person.id)}
-            changed={(event) => personChange(event, person.id)}
+            personDelete={() => context.hadleDeletePerson(person.id)}
+            changed={(event) => context.handleNameChange(event, person.id)}
           />
         ))
       }
