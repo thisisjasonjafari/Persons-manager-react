@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import Radium from 'radium';
 import { ToastContainer, toast } from 'react-toastify'
 
 
@@ -106,6 +107,7 @@ const App = () => {
         <button
           onClick={handleShowPerson}
           className={getShowPersons ? "m-2 btn btn-info " : "m-2 btn btn-danger"}
+          style={{':hover': {color:'red' , backgroundColor : 'black'}}}
         >
           {getShowPersons ? `Hide Persons` : `Show Persons`}
         </button>
@@ -123,4 +125,4 @@ const App = () => {
 
 
 
-export default App;
+export default Radium(App);
